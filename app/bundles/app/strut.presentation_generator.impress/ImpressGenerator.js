@@ -48,6 +48,15 @@ function(Handlebars, Math2, marked, DeckUtils) {
 			Handlebars.registerHelper("scaleY", function(y) {
 				return y * slideConfig.size.height / slideConfig.overviewSize.height;
 			});
+            Handlebars.registerHelper("dataScale", function(minX, maxX, minY, maxY) {
+                var width = maxX - minX;
+                console.log("width: " + width);
+                var height = maxY - minY;
+                console.log("height: " + height);
+                var scale = width < height ? window.innerWidth / width : window.innerHeight / height;
+                console.log("scale: " + scale);
+                return 10;
+            });
 			Handlebars.registerHelper("toDeg", function(v) {
 				return v * 180 / Math.PI;
 			});
@@ -181,8 +190,13 @@ function(Handlebars, Math2, marked, DeckUtils) {
 				return ++cnt;
 			});
 
+            deckAttrs.minX = minX;
+            deckAttrs.maxX = maxX;
+            deckAttrs.minY = minY;
+            deckAttrs.maxY = maxY;
 			deckAttrs.overviewX = (maxX + minX) / 2;
 			deckAttrs.overviewY = (maxY + minY) / 2;
+
 
 			return JST["strut.presentation_generator.impress/ImpressTemplate"](deck);
 		};

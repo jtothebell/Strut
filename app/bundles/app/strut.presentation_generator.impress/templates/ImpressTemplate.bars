@@ -46,7 +46,7 @@
 		{{/attributes}}
 		</div>
 	{{/slides.models}}
-	<div id="overview" class="step" data-x="{{#scaleX overviewX}}{{/scaleX}}" data-y="{{#scaleY overviewY}}{{/scaleY}}" data-scale="9"></div>
+	<div id="overview" class="step" data-x="{{#scaleX overviewX}}{{/scaleX}}" data-y="{{#scaleY overviewY}}{{/scaleY}}" data-scale="{{dataScale minX maxX minY maxY}}"></div>
 	{{/attributes}}
 </div>
 </div>
