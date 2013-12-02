@@ -44,8 +44,10 @@ function(Backbone) {
 	*/
 	return Backbone.Model.extend({
 		initialize: function() {
-			this._createModeButtons();
-			this._createCreateCompButtons();
+			// this._createModeButtons();
+			// this._createCreateCompButtons();
+			this.set('createCompButtons', []);
+			this.set('modeButtons', []);
 
 			// TODO: update to use ServiceCollection and remove the boilerplate.
 			this.registry.on('registered:strut.ComponentButtonProvider',
@@ -86,8 +88,8 @@ function(Backbone) {
 			this.trigger('change:modeButtons.push', this.get('modeButtons'), newButton);
 		},
 
-		_compBtnProviderRegistered: function(service) {
-			var newButtons = service.createButtons();
+		_compBtnProviderRegistered: function(entry) {
+			var newButtons = entry.service().createButtons(this._editorModel);
 			this.set('createCompButtons', this.get('createCompButtons').concat(newButtons));
 			this.trigger('change:createCompButtons.concat',
 				this.get('createCompButtons'), newButtons);
